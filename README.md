@@ -56,12 +56,8 @@ Now upload TopNExpensiveMapper.exe and TopNExpensiveReducer.exe to the default a
 ### Commands
 
       yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar -files wasbs:///TopNExpensiveMapper.exe,wasbs:///TopNExpensiveReducer.exe -mapper TopNExpensiveMapper.exe -reducer "TopNExpensiveReducer.exe 15" -input /reviews/input/metadata.csv -output /reviews/output
-     
-Once the MapReduce job completes, use the following to view the results
-      
-      hdfs dfs -text /reviews/output/part-00000
-      
-Details of Command
+           
+#### Details of Command
 
 The command sends various arguemnts to hadoop-streaming.jar file with yarn as interface that processes the map reduce streaming job.
 
@@ -77,6 +73,10 @@ The command sends various arguemnts to hadoop-streaming.jar file with yarn as in
 
 After running the command the output folder will contain a text file named part-00000
 
-Output
 
-To speed up the process we are reading the metadata.csv directly in the reducer to get the product details like category, title etc., The output of the mapreduce process gives a file named part-00000 and is located in the output folder.
+
+### Output
+
+To speed up the process we are reading the reviews.csv directly in the reducer to get the product details like review_text and Count of Reviews. The output of the mapreduce process gives a file named part-00000 and is located in the output folder which can be viewed by executing the command below.
+      
+      hdfs dfs -text /reviews/output/part-00000
